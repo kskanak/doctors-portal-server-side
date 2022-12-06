@@ -154,6 +154,13 @@ async function run() {
       res.send(allUsers);
     });
 
+    app.delete("/users/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await userCollections.deleteOne(query);
+      res.send(result);
+    });
+
     //  jwt
     app.get("/jwt", async (req, res) => {
       const email = req.query.email;
